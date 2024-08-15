@@ -11,7 +11,14 @@ public class SistemaAgenda {
         this.contatos = new HashMap<>();
     }
 
-    //public boolean CadastraContato(String nome, int dia, int mes){}
+    public boolean CadastraContato(String nome, int dia, int mes) {
+        if (!contatos.containsKey(nome)) {
+            Contato c = new Contato(nome, dia, mes);
+            contatos.put(nome, c);
+            return true;
+        }
+         return false;
+    }
 
     public Collection<Contato> pesquisaAniversariantes(int dia, int mes){
         Collection<Contato> aniversariantes = new ArrayList<>();
@@ -21,5 +28,12 @@ public class SistemaAgenda {
             }
         } return aniversariantes;
     }
-    // public boolean removeContato(String nome){}
+    public boolean removeContato(String nome){
+        for(Contato c: contatos.values()){
+            if(c.getNome().equals(nome)){
+                contatos.remove(nome, c);
+                return true;
+            }
+        } return false;
+    }
 }
