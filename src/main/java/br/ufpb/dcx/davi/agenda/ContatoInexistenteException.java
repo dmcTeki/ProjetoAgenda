@@ -4,4 +4,7 @@ public class ContatoInexistenteException extends Exception{
     ContatoInexistenteException(String msg){
         super(msg);
     }
+    public ContatoInexistenteException(){
+        super("Contato inexistente.");
+    }
 }

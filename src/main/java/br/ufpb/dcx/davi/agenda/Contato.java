@@ -3,15 +3,15 @@ package br.ufpb.dcx.davi.agenda;
 import java.util.Objects;
 import java.io.Serializable;
 
-public class Contato {
+public class Contato implements Serializable{
     private String nome;
     private int diaAniversario;
     private int mesAniversario;
 
-    public Contato(String nome, int diaAniversario, int mesAniversario) {
+    public Contato(String nome, int dia, int mes) {
         this.nome = nome;
-        this.diaAniversario = diaAniversario;
-        this.mesAniversario = mesAniversario;
+        this.diaAniversario = dia;
+        this.mesAniversario = mes;
     }
 
     public String getNome() {
@@ -42,13 +42,20 @@ public class Contato {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Contato contato = (Contato) o;
-        return diaAniversario == contato.diaAniversario && mesAniversario == contato.mesAniversario && Objects.equals(nome, contato.nome);
+
+        if (diaAniversario != contato.diaAniversario) return false;
+        if (mesAniversario != contato.mesAniversario) return false;
+        return Objects.equals(nome, contato.nome);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nome, diaAniversario, mesAniversario);
+        int result = nome != null ? nome.hashCode() : 0;
+        result = 31 * result + diaAniversario;
+        result = 31 * result + mesAniversario;
+        return result;
     }
 
     @Override
